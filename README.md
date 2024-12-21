@@ -1,1 +1,1 @@
-# bio-info-guy.github.io
+# Quarto based setup for my website
