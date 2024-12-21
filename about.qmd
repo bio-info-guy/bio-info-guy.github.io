@@ -12,8 +12,8 @@ about:
       href: https://www.linkedin.com/in/yangqi-su-a70745162/
     - icon: github
       text: Github
-      href: https://github.com/bio-info-guy
+      href: https://github.com/bio-info-guy/
 
 ---
 
-About this blog
+Links to my other stuff
