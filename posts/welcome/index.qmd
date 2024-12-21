@@ -1,12 +1,11 @@
 ---
-title: "Welcome To My Blog"
-author: "Tristan O'Malley"
+title: "Welcome to a blog"
+author: "Yangqi Su"
 date: "2024-12-13"
 categories: [news]
 ---
 
-This is the first post in a Quarto blog. Welcome!
+Literally should have started this years ago, the best time is 10 years ago, the next best time is now
 
-![](thumbnail.jpg)
 
-Since this post doesn't specify an explicit `image`, the first image in the post will be used in the listing page of posts.
+
