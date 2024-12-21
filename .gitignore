@@ -6,3 +6,4 @@
 /.quarto/
 *.RDS
 /docs/
+/scripts/
