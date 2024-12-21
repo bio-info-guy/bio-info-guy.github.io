@@ -1,0 +1,65 @@
+[
+  {
+    "objectID": "blog.html",
+    "href": "blog.html",
+    "title": "The bio-info-guy pages",
+    "section": "",
+    "text": "Post With Code\n\n\n\n\n\n\nnews\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\nDec 16, 2024\n\n\nHarlow Malloc\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\nDec 13, 2024\n\n\nTristan O’Malley\n\n\n\n\n\n\n\n\n\n\n\n\nQuality Control on Suspicious Clusters\n\n\n\n\n\n\n\n\n\n\n\nDec 12, 2024\n\n\nYangqi Su\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "posts/qc-on-suspicious-clusters/index.html",
+    "href": "posts/qc-on-suspicious-clusters/index.html",
+    "title": "Quality Control on Suspicious Clusters",
+    "section": "",
+    "text": "This tutorial touches on a common problem when performing quality control on scRNA-seq data: clusters that exhibit suspicious quality metrics. Specifically, what should we do when we come across clusters with consistent QC metrics (i.e. High mitochondrial expression / low total counts) that differ consistently with other clusters."
+  },
+  {
+    "objectID": "posts/qc-on-suspicious-clusters/index.html#qc-metrics-filtering-not-stringent-enough",
+    "href": "posts/qc-on-suspicious-clusters/index.html#qc-metrics-filtering-not-stringent-enough",
+    "title": "Quality Control on Suspicious Clusters",
+    "section": "QC metrics (filtering not stringent enough)",
+    "text": "QC metrics (filtering not stringent enough)\n\nLook for correlations between different QC metrics\nperform PCA and clustering on the quality metrcs to see if the same clusters appear\nIf batches exist, see if the same clusters in different batches exhibit similar quality metrics"
+  },
+  {
+    "objectID": "posts/qc-on-suspicious-clusters/index.html#biological-markers-and-pathways",
+    "href": "posts/qc-on-suspicious-clusters/index.html#biological-markers-and-pathways",
+    "title": "Quality Control on Suspicious Clusters",
+    "section": "Biological Markers and Pathways",
+    "text": "Biological Markers and Pathways\n\nfindMarker genes and compare with known marker genes to evaluate if clusters are true clusters\nEnrichment for relevant pathways and genesets and think of the biological relevance"
+  },
+  {
+    "objectID": "posts/qc-on-suspicious-clusters/index.html#automated-approaches",
+    "href": "posts/qc-on-suspicious-clusters/index.html#automated-approaches",
+    "title": "Quality Control on Suspicious Clusters",
+    "section": "Automated approaches",
+    "text": "Automated approaches\nThere are certain packages built to address these scenerios\n\nMiQC\nJointly models the mitochondrial percentage and number of genes expressed to filter out cells\n\n\nddqc\nperforms dapative thresholding in each cluster after lenient filtering of samples and clustering to achieve biologically aware filtering of low quality samples"
+  },
+  {
+    "objectID": "posts/qc-on-suspicious-clusters/index.html#examples",
+    "href": "posts/qc-on-suspicious-clusters/index.html#examples",
+    "title": "Quality Control on Suspicious Clusters",
+    "section": "Examples",
+    "text": "Examples\nWe provide some examples of using marker genes to evaluate whther or not the clusters in question are caused by biological or techincal factors\nload some packages first\n\nlibrary(rfigshare)\nlibrary(SingleCellExperiment)\nlibrary(scater)\nlibrary(org.Hs.eg.db)\nlibrary(scran)\nlibrary(AnnotationHub)\n\n\nZheng, 2017 dataset of 8 FACS sorted celltypes mixed with equal proportions\nThis dataset contains 8 different cell types that were sorted with FACS and mixed in-silico, thus cell labels are known ahead of time\n\nzheng_data &lt;- readRDS('/Users/ysu13/My Drive/Repos/myBlog/zheng_data.RDS')\nmito &lt;- which(rowData(zheng_data)$SEQNAME==\"MT\")\nstats &lt;- perCellQCMetrics(zheng_data, subsets=list(Mt=mito))\nqc &lt;- quickPerCellQC(stats, percent_subsets=c(\"subsets_Mt_percent\",\n                                              \"total\", \"detected\"))\nzheng_data &lt;- logNormCounts(zheng_data)\ngridExtra:::grid.arrange(\nplotColData(zheng_data, x=\"phenoid\", y=\"total_counts\", colour_by=\"is_cell_control\") + scale_y_log10() + ggtitle(\"Total count\"),\nplotColData(zheng_data, x=\"phenoid\", y=\"total_features\", colour_by=\"is_cell_control\") + scale_y_log10() + ggtitle(\"Number of Genes\"), nrow = 2)\n\n\n\n\nzheng_data quality\n\n\n\n\n\n\nShow marker genes for zheng data set\n\ngridExtra:::grid.arrange(\n  plotTSNE(zheng_data, colour_by = 'phenoid'),\n  plotTSNE(zheng_data, colour_by = 'CD14')\n, nrow = 2)\n\n\n\n\n\n\n\n\n\n\nHe, 2020 dataset contains scRNA-seq for 15 different organs (only Heart samples are used here)\nThis dataset contains single cells from the heart, a certain degree of prefiltering has been performed (doublet removal, &lt; 500 genes, &lt; 1000 transcript counts and &gt; 25% mitochondrial expression), the resulting clusters of heart samples are shown, cluster 7 shows higher mitochondrial content than other clusters\n\nhuman_heart &lt;- scRNAseq::HeOrganAtlasData(tissue='heart')\n\nhuman_heart$mito_gt_5 &lt;- human_heart$percent.mito &gt; 0.05\nhuman_heart$mito_gt_10 &lt;- human_heart$percent.mito &gt; 0.1\nhuman_heart$log10_nCount_RNA &lt;- log10(human_heart$nCount_RNA)\nhuman_heart$log10_nFeature_RNA &lt;- log10(human_heart$nFeature_RNA)\nhuman_heart$seurat_clusters &lt;- as.factor(human_heart$seurat_clusters)\nhuman_heart &lt;- logNormCounts(human_heart)\ngridExtra:::grid.arrange(\nplotColData(human_heart, x=\"seurat_clusters\", y=\"percent.mito\",\n            colour_by=\"mito_gt_5\")  + ggtitle(\"Mitochondrial percentage\"),\nplotColData(human_heart, x = 'seurat_clusters', y = \"log10_nFeature_RNA\", color_by = 'mito_gt_5')+ ggtitle(\"Number of Genes\")\n, nrow = 2)\n\n\n\n\n\n\n\n\n\n\nShow marker genes for human heart dataset\n\ngridExtra:::grid.arrange(\n  plotTSNE(human_heart, colour_by = 'seurat_clusters'),\n  plotTSNE(human_heart, colour_by = 'MYH11')\n, nrow = 2)"
+  },
+  {
+    "objectID": "posts/post-with-code/index.html",
+    "href": "posts/post-with-code/index.html",
+    "title": "Post With Code",
+    "section": "",
+    "text": "This is a post with executable code.\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "posts/welcome/index.html",
+    "href": "posts/welcome/index.html",
+    "title": "Welcome To My Blog",
+    "section": "",
+    "text": "This is the first post in a Quarto blog. Welcome!\n\nSince this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Yangqi Su",
+    "section": "",
+    "text": "Links to my other stuff"
+  }
+]
