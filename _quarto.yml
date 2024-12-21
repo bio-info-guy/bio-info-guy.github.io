@@ -1,15 +1,20 @@
 project:
   type: website
   output-dir: docs
+execute:
+  freeze: auto
 website:
-  title: "Blogs"
+  title: "Yangqi's website"
   navbar:
     right:
-      - about.qmd
+      - text: Blog
+        href: blog.qmd
       - icon: github
-        href: https://github.com/
+        href: https://github.com/bio-info-guy
       - icon: twitter
-        href: https://twitter.com
+        href: https://x.com/yqsu_bioinfo
+      - icon: linkedin
+        href: https://www.linkedin.com/in/yangqi-su-a70745162/
 format:
   html:
     theme: cosmo
