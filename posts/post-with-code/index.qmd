@@ -1,13 +1,16 @@
 ---
 title: "Post With Code"
-author: "Harlow Malloc"
+author: "Yangqi Su"
 date: "2024-12-16"
 categories: [news, code, analysis]
 image: "image.jpg"
 ---
 
-This is a post with executable code.
+This is a sample post with some code in R
 
 ```{r}
 1 + 1
+2 + 2
+print('something')
 ```
+
