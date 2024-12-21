@@ -7,3 +7,4 @@
 *.RDS
 /docs/
 /scripts/
+*.RData
