@@ -4,21 +4,21 @@
     "href": "blog.html",
     "title": "The bio-info-guy pages",
     "section": "",
-    "text": "Post With Code\n\n\n\n\n\n\nnews\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\nDec 16, 2024\n\n\nYangqi Su\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome to a blog\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\nDec 13, 2024\n\n\nYangqi Su\n\n\n\n\n\n\n\n\n\n\n\n\nQuality Control on Suspicious Clusters\n\n\n\n\n\n\n\n\n\n\n\nDec 12, 2024\n\n\nYangqi Su\n\n\n\n\n\n\nNo matching items"
+    "text": "A test post with some code\n\n\n\n\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\nDec 16, 2024\n\n\nYangqi Su\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome to a blog\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\nDec 13, 2024\n\n\nYangqi Su\n\n\n\n\n\n\n\n\n\n\n\n\nQuality Control on Suspicious Clusters\n\n\n\n\n\n\n\n\n\n\n\nDec 12, 2024\n\n\nYangqi Su\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "posts/post-with-code/index.html",
     "href": "posts/post-with-code/index.html",
-    "title": "Post With Code",
+    "title": "A test post with some code",
     "section": "",
-    "text": "This is a sample post with some code in R\n\n1 + 1\n\n[1] 2\n\n2 + 2\n\n[1] 4\n\nprint('something')\n\n[1] \"something\""
+    "text": "Running some code in R and Python running code requires rendering in correct environment with relevant packages installed\n\n1 + 1\n\n[1] 2\n\n2 + 2\n\n[1] 4\n\nprint('something')\n\n[1] \"something\"\n\n\n\n1+1\n\n[1] 2\n\na &lt;- 1\nx &lt;- rnorm(1, 0, 1)\n\n\nimport numpy as np\nimport matplotlib.pyplot as plt\n\nr = np.arange(0, 2, 0.01)\ntheta = 2 * np.pi * r\nfig, ax = plt.subplots(\n  subplot_kw = {'projection': 'polar'} \n)\nax.plot(theta, r)\nax.set_rticks([0.5, 1, 1.5, 2])\nax.grid(True)\nplt.show()\n\n\n\n\n\n\n\nFigure 1: A line plot on a polar axis"
   },
   {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Yangqi Su",
     "section": "",
-    "text": "Links to my other stuff\n1+1\na &lt;- 1\nx &lt;- rnorm(1, 0, 1)\n\nimport numpy as np\nimport matplotlib.pyplot as plt\n\nr = np.arange(0, 2, 0.01)\ntheta = 2 * np.pi * r\nfig, ax = plt.subplots(\n  subplot_kw = {'projection': 'polar'} \n)\nax.plot(theta, r)\nax.set_rticks([0.5, 1, 1.5, 2])\nax.grid(True)\nplt.show()\n\n\n\n\n\n\n\nFigure 1: A line plot on a polar axis"
+    "text": "Links to my other stuff"
   },
   {
     "objectID": "posts/qc-on-suspicious-clusters/index.html",
