@@ -1,6 +1,6 @@
 ---
 title: "Yangqi Su"
-image: "profile_pic.png"
+image: "profile_pic.jpeg"
 about:
   template: jolla
   links:
