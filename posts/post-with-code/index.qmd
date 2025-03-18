@@ -1,12 +1,12 @@
 ---
-title: "Post With Code"
+title: "A test post with some code"
 author: "Yangqi Su"
 date: "2024-12-16"
-categories: [news, code, analysis]
-image: "image.jpg"
+categories: [code, analysis]
 ---
 
-This is a sample post with some code in R
+Running some code in R and Python
+**running code requires rendering in correct environment with relevant packages installed**
 
 ```{r}
 1 + 1
@@ -14,3 +14,28 @@ This is a sample post with some code in R
 print('something')
 ```
 
+
+
+```{r}
+1+1
+a <- 1
+x <- rnorm(1, 0, 1)
+```
+
+```{python}
+#| label: fig-polar
+#| fig-cap: "A line plot on a polar axis"
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+r = np.arange(0, 2, 0.01)
+theta = 2 * np.pi * r
+fig, ax = plt.subplots(
+  subplot_kw = {'projection': 'polar'} 
+)
+ax.plot(theta, r)
+ax.set_rticks([0.5, 1, 1.5, 2])
+ax.grid(True)
+plt.show()
+```

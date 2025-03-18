@@ -1,10 +1,10 @@
 {
-  "hash": "f21365e3aad86f2595f4a1186ed4c0b9",
+  "hash": "6a94eddd171a5f2d964b7f04679fee8a",
   "result": {
     "engine": "jupyter",
-    "markdown": "---\ntitle: \"Yangqi Su\"\nimage: \"profile_pic.jpeg\"\nabout:\n  template: jolla\n  links:\n    - icon: twitter\n      text: Twitter\n      href: https://x.com/yqsu_bioinfo\n    - icon: linkedin\n      text: LinkedIn\n      href: https://www.linkedin.com/in/yangqi-su-a70745162/\n    - icon: github\n      text: Github\n      href: https://github.com/bio-info-guy/\njupyter: python3\n---\n\n\n\n\nLinks to my other stuff\n\n\n\n\n```{r}\n1+1\na <- 1\nx <- rnorm(1, 0, 1)\n```\n\n::: {#cell-fig-polar .cell execution_count=1}\n``` {.python .cell-code}\nimport numpy as np\nimport matplotlib.pyplot as plt\n\nr = np.arange(0, 2, 0.01)\ntheta = 2 * np.pi * r\nfig, ax = plt.subplots(\n  subplot_kw = {'projection': 'polar'} \n)\nax.plot(theta, r)\nax.set_rticks([0.5, 1, 1.5, 2])\nax.grid(True)\nplt.show()\n```\n\n::: {.cell-output .cell-output-display}\n![A line plot on a polar axis](index_files/figure-html/fig-polar-output-1.png){#fig-polar width=450 height=439}\n:::\n:::\n\n\n",
+    "markdown": "---\ntitle: \"Yangqi Su\"\nimage: \"profile_pic.jpeg\"\nabout:\n  template: jolla\n  links:\n    - icon: twitter\n      text: Twitter\n      href: https://x.com/yqsu_bioinfo\n    - icon: linkedin\n      text: LinkedIn\n      href: https://www.linkedin.com/in/yangqi-su-a70745162/\n    - icon: github\n      text: Github\n      href: https://github.com/bio-info-guy/\njupyter: python3\n---\n\n\nLinks to my other stuff\n\n",
     "supporting": [
-      "index_files"
+      "index_files/figure-html"
     ],
     "filters": [],
     "includes": {}
