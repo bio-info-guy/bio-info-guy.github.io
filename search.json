@@ -1,10 +1,10 @@
 [
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Yangqi Su",
+    "objectID": "blog.html",
+    "href": "blog.html",
+    "title": "The bio-info-guy pages",
     "section": "",
-    "text": "Links to my other stuff"
+    "text": "Post With Code\n\n\n\n\n\n\nnews\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\nDec 16, 2024\n\n\nYangqi Su\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome to a blog\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\nDec 13, 2024\n\n\nYangqi Su\n\n\n\n\n\n\n\n\n\n\n\n\nQuality Control on Suspicious Clusters\n\n\n\n\n\n\n\n\n\n\n\nDec 12, 2024\n\n\nYangqi Su\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "posts/post-with-code/index.html",
@@ -14,18 +14,11 @@
     "text": "This is a sample post with some code in R\n\n1 + 1\n\n[1] 2\n\n2 + 2\n\n[1] 4\n\nprint('something')\n\n[1] \"something\""
   },
   {
-    "objectID": "blog.html",
-    "href": "blog.html",
-    "title": "The bio-info-guy pages",
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Yangqi Su",
     "section": "",
-    "text": "Post With Code\n\n\n\n\n\n\nnews\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\nDec 16, 2024\n\n\nYangqi Su\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome to a blog\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\nDec 13, 2024\n\n\nYangqi Su\n\n\n\n\n\n\n\n\n\n\n\n\nQuality Control on Suspicious Clusters\n\n\n\n\n\n\n\n\n\n\n\nDec 12, 2024\n\n\nYangqi Su\n\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "posts/welcome/index.html",
-    "href": "posts/welcome/index.html",
-    "title": "Welcome to a blog",
-    "section": "",
-    "text": "Literally should have started this years ago, the best time is 10 years ago, the next best time is now"
+    "text": "Links to my other stuff\n1+1\na &lt;- 1\nx &lt;- rnorm(1, 0, 1)\n\nimport numpy as np\nimport matplotlib.pyplot as plt\n\nr = np.arange(0, 2, 0.01)\ntheta = 2 * np.pi * r\nfig, ax = plt.subplots(\n  subplot_kw = {'projection': 'polar'} \n)\nax.plot(theta, r)\nax.set_rticks([0.5, 1, 1.5, 2])\nax.grid(True)\nplt.show()\n\n\n\n\n\n\n\nFigure 1: A line plot on a polar axis"
   },
   {
     "objectID": "posts/qc-on-suspicious-clusters/index.html",
@@ -61,5 +54,12 @@
     "title": "Quality Control on Suspicious Clusters",
     "section": "Examples",
     "text": "Examples\nWe provide some examples of using marker genes to evaluate whther or not the clusters in question are caused by biological or techincal factors\nload some packages first\n\nlibrary(rfigshare)\nlibrary(SingleCellExperiment)\nlibrary(scater)\nlibrary(org.Hs.eg.db)\nlibrary(scran)\nlibrary(AnnotationHub)\n\n\nZheng, 2017 dataset of 8 FACS sorted celltypes mixed with equal proportions\nThis dataset contains 8 different cell types that were sorted with FACS and mixed in-silico, thus cell labels are known ahead of time\n\nzheng_data &lt;- readRDS('/Users/ysu13/My Drive/Repos/myBlog/zheng_data.RDS')\nmito &lt;- which(rowData(zheng_data)$SEQNAME==\"MT\")\nstats &lt;- perCellQCMetrics(zheng_data, subsets=list(Mt=mito))\nqc &lt;- quickPerCellQC(stats, percent_subsets=c(\"subsets_Mt_percent\",\n                                              \"total\", \"detected\"))\nzheng_data &lt;- logNormCounts(zheng_data)\ngridExtra:::grid.arrange(\nplotColData(zheng_data, x=\"phenoid\", y=\"total_counts\", colour_by=\"is_cell_control\") + scale_y_log10() + ggtitle(\"Total count\"),\nplotColData(zheng_data, x=\"phenoid\", y=\"total_features\", colour_by=\"is_cell_control\") + scale_y_log10() + ggtitle(\"Number of Genes\"), nrow = 2)\n\n\n\n\nzheng_data quality\n\n\n\n\n\n\nShow marker genes for zheng data set\n\ngridExtra:::grid.arrange(\n  plotTSNE(zheng_data, colour_by = 'phenoid'),\n  plotTSNE(zheng_data, colour_by = 'CD14')\n, nrow = 2)\n\n\n\n\n\n\n\n\n\n\nHe, 2020 dataset contains scRNA-seq for 15 different organs (only Heart samples are used here)\nThis dataset contains single cells from the heart, a certain degree of prefiltering has been performed (doublet removal, &lt; 500 genes, &lt; 1000 transcript counts and &gt; 25% mitochondrial expression), the resulting clusters of heart samples are shown, cluster 7 shows higher mitochondrial content than other clusters\n\nhuman_heart &lt;- scRNAseq::HeOrganAtlasData(tissue='heart')\n\nhuman_heart$mito_gt_5 &lt;- human_heart$percent.mito &gt; 0.05\nhuman_heart$mito_gt_10 &lt;- human_heart$percent.mito &gt; 0.1\nhuman_heart$log10_nCount_RNA &lt;- log10(human_heart$nCount_RNA)\nhuman_heart$log10_nFeature_RNA &lt;- log10(human_heart$nFeature_RNA)\nhuman_heart$seurat_clusters &lt;- as.factor(human_heart$seurat_clusters)\nhuman_heart &lt;- logNormCounts(human_heart)\ngridExtra:::grid.arrange(\nplotColData(human_heart, x=\"seurat_clusters\", y=\"percent.mito\",\n            colour_by=\"mito_gt_5\")  + ggtitle(\"Mitochondrial percentage\"),\nplotColData(human_heart, x = 'seurat_clusters', y = \"log10_nFeature_RNA\", color_by = 'mito_gt_5')+ ggtitle(\"Number of Genes\")\n, nrow = 2)\n\n\n\n\n\n\n\n\n\n\nShow marker genes for human heart dataset\n\ngridExtra:::grid.arrange(\n  plotTSNE(human_heart, colour_by = 'seurat_clusters'),\n  plotTSNE(human_heart, colour_by = 'MYH11')\n, nrow = 2)"
+  },
+  {
+    "objectID": "posts/welcome/index.html",
+    "href": "posts/welcome/index.html",
+    "title": "Welcome to a blog",
+    "section": "",
+    "text": "Literally should have started this years ago, the best time is 10 years ago, the next best time is now"
   }
 ]
